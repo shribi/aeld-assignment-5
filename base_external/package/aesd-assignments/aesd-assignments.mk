@@ -5,13 +5,14 @@
 #
 ##############################################################
 
-AESD_ASSIGNMENTS_VERSION = 29869c4
+AESD_ASSIGNMENTS_VERSION = 646b532
 AESD_ASSIGNMENTS_SITE = git@github.com:cu-ecen-aeld/assignments-3-and-later-shribi.git
 AESD_ASSIGNMENTS_SITE_METHOD = git
 AESD_ASSIGNMENTS_GIT_SUBMODULES = YES
 
 define AESD_ASSIGNMENTS_BUILD_CMDS
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/finder-app
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/server
 endef
 
 define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
@@ -23,6 +24,9 @@ define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(@D)/finder-app/finder-test.sh $(TARGET_DIR)/bin
 	$(INSTALL) -m 0755 $(@D)/finder-app/writer.sh $(TARGET_DIR)/bin
 	$(INSTALL) -m 0755 $(@D)/finder-app/writer $(TARGET_DIR)/bin
+	
+	$(INSTALL) -m 0755 $(@D)/server/aesdsocket-start-stop.sh $(TARGET_DIR)/etc/init.d/S99aesdsocket
+	$(INSTALL) -m 0755 $(@D)/server/aesdsocket $(TARGET_DIR)/bin
 endef
 
 $(eval $(generic-package))
