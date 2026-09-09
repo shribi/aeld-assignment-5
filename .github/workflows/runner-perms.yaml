@@ -1,0 +1,7 @@
+- name: Debug Docker permissions
+  run: |
+    whoami
+    id
+    groups
+    ls -l /var/run/docker.sock
+    docker version
