@@ -6,23 +6,26 @@ on:
         branches:
             - '*'
 jobs:
+    env-test:
+      runs-on: self-hosted
+      steps:
+        - name: Debug Docker permissions
+          run: |
+            echo "=== User ==="
+            whoami
+            echo "=== ID ==="
+            id
+            echo "=== Groups ==="
+            groups
+            echo "=== Docker socket ==="
+            ls -l /var/run/docker.sock
+            echo "=== Docker version ==="
+            docker version   
     full-test:
         container: cuaesd/aesd-autotest:24-assignment7-buildroot
         runs-on: self-hosted
         timeout-minutes: 720
-        steps:
-          - name: Debug Docker permissions
-            run: |
-              echo "=== User ==="
-              whoami
-              echo "=== ID ==="
-              id
-              echo "=== Groups ==="
-              groups
-              echo "=== Docker socket ==="
-              ls -l /var/run/docker.sock
-              echo "=== Docker version ==="
-              docker version          
+        steps:       
           - uses: actions/checkout@v2
           - name: Checkout submodules
             run: git submodule update --init --recursive
