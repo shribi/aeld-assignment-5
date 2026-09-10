@@ -20,8 +20,8 @@ define LDD_BUILD_CMDS
 endef
 
 define LDD_INSTALL_TARGET_CMDS
-	$(INSTALL) -m 0755 $(@D)/misc-modules/*.ko $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/ldd
-	$(INSTALL) -m 0755 $(@D)/scull/*.ko $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/ldd
+	$(INSTALL) -D -m 0755 $(@D)/misc-modules/*.ko -t $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/ldd
+	$(INSTALL) -D -m 0755 $(@D)/scull/*.ko -t $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/ldd
 endef
 
 $(eval $(generic-package))
